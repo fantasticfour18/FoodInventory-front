@@ -1,0 +1,116 @@
+<div id="overlay" *ngIf="isLoading">
+  <div class="overlay-content">
+      <div class="spinner-border"></div>
+  </div>
+</div>
+
+<div class="container">
+  <form *ngIf="resvForm" [formGroup]="resvForm" (ngSubmit)="sendResvInfo()">
+  <div class="row">
+    <div class="col-md-6">
+        <div class="resv-header">
+          <h1>Reservierung Formulae</h1>
+        </div>
+
+        <div style="padding-bottom: 10px; color: #707070;">
+          <span class="inputRequired">*&nbsp;&nbsp;</span>
+          <span style="text-decoration: underline">
+              Diese Felder sind Pflichtfelder<!-- These fields are required --></span>
+        </div>
+
+        <div class="form-group">
+          <label for="customerName">Name <span class="inputRequired">&nbsp;&nbsp;*</span></label>
+          <input type="text" class="form-control" id="customerName" formControlName="name">
+        </div>
+        <div *ngIf="(resvForm.get('name').touched || resvForm.get('name').dirty)
+                                      && !resvForm.get('name').valid" class="errorMsg">
+            <!-- Please enter valid name. -->Bitte geben Sie einen gültigen Namen ein.
+        </div>
+
+        <div class="form-group">
+          <label for="totalPerson">Anzahl Person <span class="inputRequired">&nbsp;&nbsp;*</span></label>
+          <input type="number" class="form-control" id="totalPerson" formControlName="totalPerson">
+        </div>
+        <div *ngIf="(resvForm.get('totalPerson').touched || resvForm.get('totalPerson').dirty)
+                                      && !resvForm.get('totalPerson').valid" class="errorMsg">
+            <!-- Please enter total number of persons. -->Bitte geben Sie die Gesamtzahl der Personen an.
+        </div>
+
+        <div class="form-group">
+          <label for="dateOfResv">Date <span class="inputRequired">&nbsp;&nbsp;*</span></label>
+          <input type="date" class="form-control" id="dateOfResv" formControlName="dateOfResv">
+        </div>
+        <div *ngIf="(resvForm.get('dateOfResv').touched || resvForm.get('dateOfResv').dirty)
+                                      && !resvForm.get('dateOfResv').valid" class="errorMsg">
+            <!-- Please enter date of reservation. -->Bitte geben Sie das Reservierungsdatum ein.
+        </div>
+
+        <div class="form-group">
+          <label for="timeOfResv">Time <span class="inputRequired">&nbsp;&nbsp;*</span></label>
+          <input type="time" class="form-control" id="timeOfResv" formControlName="timeOfResv">
+        </div>
+        <div *ngIf="(resvForm.get('timeOfResv').touched || resvForm.get('timeOfResv').dirty)
+                                      && !resvForm.get('timeOfResv').valid" class="errorMsg">
+            <!-- Please enter time of reservation. -->Bitte geben Sie die Uhrzeit der Reservierung ein.
+        </div>
+
+        <div class="form-group">
+          <label for="phoneNumber">Telefon <span class="inputRequired">&nbsp;&nbsp;*</span></label>
+          <input type="number" class="form-control" id="phoneNumber" formControlName="phoneNumber">
+        </div>
+        <div *ngIf="(resvForm.get('phoneNumber').touched || resvForm.get('phoneNumber').dirty)
+                                      && !resvForm.get('phoneNumber').valid" class="errorMsg">
+            <!-- Please enter valid phone number. -->Bitte geben Sie eine gültige Handynummer ein.
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail <span class="inputRequired">&nbsp;&nbsp;*</span></label>
+          <input type="email" class="form-control" id="email" formControlName="email">
+        </div>
+        <div *ngIf="(resvForm.get('email').touched || resvForm.get('email').dirty)
+                                      && !resvForm.get('email').valid" class="errorMsg">
+            <!-- Please enter valid email. -->bitte eine gültige E-Mail-Adresse eintragen.
+        </div>
+
+        <div class="form-group pb-5">
+          <label for="notes">Nachricht</label>
+          <textarea id="notes" rows="5" class="form-control" formControlName="notes"></textarea>
+        </div>
+
+        <div class="send-btn text-center">
+          <button type="submit" class="btn btn-primary" [disabled]="!resvForm.get('name').valid
+            || !resvForm.get('totalPerson').valid || !resvForm.get('dateOfResv').valid
+            || !resvForm.get('timeOfResv').valid || !resvForm.get('phoneNumber').valid
+            || !resvForm.get('email').valid || isFormSubmit">
+             <span *ngIf="!isFormSubmit">Schicken</span> <!--Send-->
+             <span *ngIf="isFormSubmit" class="spinner-border"></span>
+          </button>
+        </div>
+    </div>
+
+    <div *ngIf="restProfile" class="col-md-6 text-right rest-profile">
+      <div class="border"><i class="fas fa-map-marker-alt"></i> <span>{{restProfile.location}}</span></div>
+      <div class="border"><i class="fas fa-phone-alt"></i> <span>{{restProfile.phoneNumber}}</span></div>
+      <div class="border"><i class="fas fa-envelope"></i> <span>{{restProfile.restEmail}}</span></div>
+    </div>
+  </div>
+
+  </form>
+
+
+  <div class="modal" *ngIf="showNotice">
+    <div class="popup">
+      <button class="btn-danger close position-absolute"
+        (click)="showNotice = (showNotice ? false : true)">&times;</button>
+        <div class="modal-body">
+            <h2 class="section-title text-center text-uppercase py-5"><strong>Ihre Reservierung wurde erfolgreich empfangen !</strong></h2>
+            <p class="text-center">Sie werden in {{timer}} Sekunden zur Startseite weitergeleitet.</p>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="showNotice = false;">Ok</button>
+        </div>
+    </div>
+  </div>
+
+</div>

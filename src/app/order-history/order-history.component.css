@@ -1,0 +1,8 @@
+.row.mobile_flex_col {
+  align-items: center !important;
+}
+.row.mobile_flex_col .col-sm-2.order-thumb {
+  background-color: #ffd6db !important;
+  padding: 0 !important;
+  height: 125px;
+}

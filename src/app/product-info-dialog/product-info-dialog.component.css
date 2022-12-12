@@ -1,0 +1,37 @@
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+}
+
+button:focus{
+  outline: none;
+}
+
+::ng-deep .icon-outside .close-button{
+  float: right;
+  top:-52px;
+  right:-52px;
+}
+
+::ng-deep .icon-outside .mat-dialog-container {
+ overflow: unset
+}
+
+.allergy-name{
+  margin-bottom: 10px;
+}
+
+ul.a{
+  list-style-position: outside;
+}
+
+ul.a li {
+  font-weight: normal!important;
+}
+
+.product-popup{
+  border-bottom: 1px solid #e6e6e6;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+}

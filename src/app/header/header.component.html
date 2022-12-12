@@ -1,0 +1,26 @@
+<header class="header bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 header-logo">
+                <a routerLink="/"><img src="data:image/png;base64,{{this.logoService.getLogo()}}" alt="Logo"></a>
+            </div>
+            <div *ngIf="userName" class="col-sm-6 d-flex justify-content-end">
+                <p class="my-auto mr-0 float-right" id="menu_box" (click)="profileDropdown = (profileDropdown == true ? false : true)">
+                    <span class="text-danger">
+                        <img src="assets/icons/user-red.svg">
+                    </span>
+                    <strong>{{userName}}</strong>
+                    <span class="icon">
+                        <img src="assets/icons/arrow_down.png">
+                    </span>
+                </p>
+                <div class="profile-dropdown" *ngIf="profileDropdown">
+                    <ul class="profile-nav">
+                        <li class="nav-item"><a routerLink="/order-history"><!-- Order History -->Bestellverlauf</a></li>
+                        <li class="nav-item"><a (click)="logOut()"> Ausloggen<!-- Logout --></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,86 @@
+<div class="page-wrapper">
+    <div class="container" id="order_histroy_page">
+        <div class="col-sm-12 pl-0">
+            <H1 class="page-title">
+                Ihre Bestellhistorie<!-- Your Order History --></H1>
+        </div>
+        <!-- <a class="btn btn-success mobile_none" (click)="passcodePopup = (passcodePopup == true ? false : true)">Passcode</a>
+        <a class="btn btn-success mobile_none" (click)="productPopup = (productPopup == true ? false : true)">Product</a> -->
+        <div class="col-xs-12 col-sm-12 col-md-10" id="w-100">
+            <div *ngFor="let orders of ordersList; let i = index;" class="row bg-white border border-2 p-2 mb-2 mobile_flex_col">
+                <div class="col-sm-2 order-thumb d-flex">
+                    <img src="data:image/png;base64,{{this.logoService.getLogo()}}" class="logo w-100 m-auto">
+                </div>
+                <div class="col-sm-10">
+                    <h3 class="product-title m-0"><strong>{{orders.orderNumber}} - (Status: {{orders.orderStatus}})</strong></h3>
+                    <p class="m-0">{{orders.createdAt | date:'short':'UTC +1'}}</p>
+                    <h4 class='m-0'>Zahlungsart<!-- Payment Mode -->: <span class='text-danger'>{{orders.paymentMode}}</span></h4>
+                    <h4 class='text-danger m-0'>{{orders.totalAmount | number: '1.2-2' | germanCurr: orders.totalAmount}} €</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="modal" *ngIf="productPopup">
+        <div class="popup">
+            <button class="btn-danger close position-absolute" (click)="productPopup = (this.productPopup == true ? false : true)">&times;</button>
+            <div class="modal-body">
+                <h2 class="section-title text-center m-0"><strong>Pasanda</strong></h2>
+                <h3 class="text-danger text-center m-0"><strong>$10.00</strong></h3>
+                <p class="text-center m-0 w-60 m-auto">Lorem ipsum is dummy text used to print as dummy text.</p>
+
+                <div class="product-variants mt-4">
+                    <h2 class='section-title'>Choose One</h2>
+                    <div class="form-group m-0">
+                        <input type="radio" class="variant-input" name="variant" id="variant1">
+                        <label for="variant1">
+                            Chicken
+                            <span>$10</span>
+                        </label>
+                    </div>
+                    <div class="form-group m-0">
+                        <input type="radio" class="variant-input" name="variant" id="variant2">
+                        <label for="variant2">
+                            Chicken
+                            <span>$10</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class='btn-danger btn btn-block'>Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="passcodePopup">
+        <div class="popup">
+            <button class="btn-danger close position-absolute" (click)="passcodePopup = (passcodePopup == true ? false : true)">&times;</button>
+            <div class="modal-body">
+                <h2 class="section-title text-center text-uppercase m-0"><strong>Select Delivery Type</strong></h2>
+
+                <div class="delivery-type-section my-4 mx-auto">
+                    <div class='w-50 float-left'>
+                        <input type="radio" checked class="d-none delivery-selection" name="delivery_type" id="delivery">
+                        <label for="delivery">
+                            <span><img src="assets/icons/delivery-grn.svg"></span> Collection
+                        </label>
+                    </div>
+                    <div class='w-50 float-left'>
+                        <input type="radio" class="d-none delivery-selection" name="delivery_type" id="collection">
+                        <label for="collection">
+                            <span><img src="assets/icons/collection-grn.svg"></span> Delivery
+                        </label>
+                    </div>
+                </div>
+
+                <div class="my-4">
+                    <div class="form-group m-0">
+                        <label for="variant1"><strong>Enter Passcode</strong></label>
+                        <input type="text" class="form-control" name="variant" id="variant1">
+                    </div>
+                </div>
+
+                <button class='btn-danger btn btn-block'>Submit</button>
+            </div>
+        </div>
+    </div> -->
+</div>

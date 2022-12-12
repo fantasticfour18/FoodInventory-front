@@ -1,0 +1,35 @@
+p.gray_text {
+    color: #aeaeae;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500 !important;
+    margin: 0;
+    padding: 0 20px !important;
+}
+h5.prdct-discount {
+  display: inline-block;
+  background: #57cc02;
+  font-size: 10px;
+  line-height: 10px;
+  font-weight: 500;
+  color: white;
+  padding: 4px 7px 3px;
+  border-radius: 11px;
+}
+
+.prdct-checkout-discount {
+  font-size: 8px;
+  line-height: 10px;
+  color: #57cc02;
+}
+
+.discount {
+  display: inline-block;
+  background: #57cc02;
+  font-size: 10px;
+  line-height: 10px;
+  font-weight: 500;
+  color: #fff;
+  padding: 4px 7px 3px;
+  border-radius: 11px;
+}

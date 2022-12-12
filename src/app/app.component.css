@@ -1,0 +1,38 @@
+/* app{
+    min-height: 100%;
+    width:100%;
+    margin-bottom: -271px;
+    display:table
+}
+
+header, router-outlet, footer{
+    display: table-row;
+}
+
+header{
+    height: 60px;
+}
+
+router-outlet{
+    position:absolute;
+}
+
+footer{
+    height:271px;
+}
+
+html, body{
+    height:100%;
+    margin:0;
+
+}
+
+footer{
+    margin-top: auto;
+}
+
+.main-root{
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+} */

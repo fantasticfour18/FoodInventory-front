@@ -1,0 +1,5 @@
+<!-- *ngIf="loginStatus" -->
+<app-header *ngIf="headerVisible"></app-header>
+<router-outlet></router-outlet>
+<app-footer *ngIf="footerVisible" [ngStyle]="footerHomePadding"></app-footer>
+<!-- *ngIf="footerVisible" *ngIf="href != '/'" -->

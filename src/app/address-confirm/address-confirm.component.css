@@ -1,0 +1,36 @@
+.body-height-auto {
+  height: auto;
+}
+
+.row {
+    margin-top: 30px;
+    /* margin-bottom: 66px; */
+}
+
+.row-main {
+  padding-bottom: 50px;
+}
+
+/*.first-box{
+    height: 625px;
+}*/
+
+.address-box {
+  height: auto;
+  margin-bottom: calc(50vh - 200px);
+}
+
+.btn{
+    margin-top: 40px;
+}
+
+.anchor-text{
+    cursor: pointer;
+    text-decoration: underline!important;
+}
+
+/* @media only screen and (min-width: 320px) and (max-width: 768.98px) {
+  ::ng-deep footer {
+     display: block!important;
+ }
+} */

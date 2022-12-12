@@ -1,0 +1,179 @@
+<div id="overlay" *ngIf="isLoading">
+  <div class="overlay-content">
+      <div class="spinner-border"></div>
+  </div>
+</div>
+<div class="page-wrapper" id="order_success_page_wraper">
+    <div class="container cart-home" id="order_success_page">
+        <div class="row" id="payment_method_mobile">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 px-0" id="success_box">
+                <form [formGroup]="paymentMode">
+                <h4 *ngIf="errMsg" class="text-danger">{{errMsg}}</h4>
+
+                <div class="deliveryTime mb-5">
+                  <!-- <h4 class="title">{{orderTimeTitle}}</h4> -->
+                  <h4 class="title">Wählen Sie Bestellmodus</h4>
+                  <div class="accordion accordion-flush accordion-wrapper" id="accordionFlushExample1">
+
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <div class="accordion-item" *ngIf="orderTimes.length">
+                            <label for="orderNowRadio" class="accordion-button1 orderModeContainer">
+                              <input id="orderNowRadio" class="orderTimeMode" (ngModelChange)="setDeliveryOption()" type="radio" value="TodayOrder" formControlName="advanceOrder" name="advanceOrder">
+                              Bestellen Sie heute
+                              <span class="checkmark"></span>
+                            </label>
+                            <div class="radio-input-container" *ngIf="paymentMode.get('advanceOrder').value != 'AdvanceOrder'">
+                              <h4 >{{orderTimeTitle}}</h4>
+                              <select class="form-control" formControlName="orderTime" (change)="setOrderTime()">
+                                <option [disabled]="paymentMode.get('advanceOrder').value == 'AdvanceOrder'" *ngFor="let times of orderTimes" value="{{times}}">{{times}}</option>
+                              </select>
+                            </div>
+
+                        </div>
+
+                        <div class="accordion-item orderTimeMode">
+
+                          <label for="advanceOrderRadio" class="accordion-button1 orderModeContainer">
+                            <input id="advanceOrderRadio" class="orderTimeMode" (ngModelChange)="setDeliveryOption()" type="radio" value="AdvanceOrder" formControlName="advanceOrder" name="advanceOrder">
+                            Vorbestellen <!-- Advance Order -->
+                            <span class="checkmark"></span>
+                          </label>
+                          <div class="radio-input-container" *ngIf="paymentMode.get('advanceOrder').value == 'AdvanceOrder'">
+                            <span>
+                              <span class="owl-input-title">Date Time: </span>
+                              <input readonly class="mx-2" id="owlInput" [owlDateTimeFilter]="datesFilter" [min]="minDate" [max]="maxDate"
+                                [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" (dateTimeChange)="setAdvanceOrderDateTime($event)">
+                                <!-- <span>
+                                  <i class="fas fa-calendar-alt"></i>
+                                </span> -->
+                              <owl-date-time [pickerMode]="'dialog'" [startAt]="startAt" #dt2 [disabled]="paymentMode.get('advanceOrder').value == 'TodayOrder'"></owl-date-time>
+                            </span>
+                          </div>
+                        </div>
+
+                      </h2>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- <div class="accordion-wrapper tip-input mb-5">
+                  <h4> Trinkgeld </h4>
+                  <div class="accordion-item">
+                    <mat-form-field appearance="standard" [floatLabel]="'never'" class="tip-form">
+                      <input type="number" matInput placeholder="Ex: 5 or 10 or 20" formControlName="tip" (input)="setTipOption()">
+                    </mat-form-field>
+                  </div>
+                </div> -->
+
+               <div *ngIf="isTimeAcceptable && isItemAcceptable">
+                <div class="payment_method_box">
+                    <h4 class="title"> Wie möchten Sie bezahlen?<!-- How would You like to pay? --></h4>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="cashondelivery">
+                              <label for="cashon" class="accordion-button1">
+                                <div class="form-check">
+                                  <input id="cashon" class="form-check-input" (ngModelChange)="setPaymentMode()" type="radio" value="Barzahlung" formControlName="mode" name="mode">
+                                  <span class="form-check-label">Barzahlung</span> <!--  Cash on Delivery -->
+                                  <img src="assets/images/cash-icon-29.jpg" class="cash-image pl-4" alt="">
+                                </div>
+                              </label>
+                            </h2>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="paywithpaypal">
+                                <label for="paypal" class="accordion-button1">
+                                  <div class="form-check">
+                                    <input id="paypal" class="form-check-input" (ngModelChange)="setPaymentMode()" type="radio" value="Online" formControlName="mode" name="mode">
+                                    <span class="form-check-label">Paypal</span>
+                                    <img src="assets/images/paypal_icon.png" class="cash-image pl-4" alt="">
+                                  </div>
+                                </label>
+                            </h2>
+
+                            <div [ngClass]="payMode == 'Online' ? '' : 'paymentBtnDisabled'">
+                              <ngx-paypal *ngIf="orderTime" [config]="payPalConfig"></ngx-paypal>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="paywithStripe">
+                              <label for="stripe" class="accordion-button1">
+                                <div class="form-check">
+                                  <input id="stripe" class="form-check-input" (ngModelChange)="setPaymentMode()" type="radio" value="Stripe" formControlName="mode" name="mode">
+                                  <span class="form-check-label">Stripe</span>
+                                  <img src="assets/images/stripe_logo.png" class="cash-image pl-4" alt="">
+                                  <img src="assets/images/payment-card.png" class="card-image pl-2" alt="">
+                                </div>
+                              </label>
+                          </h2>
+                          <div *ngIf="payMode == 'Stripe' && orderTime" id="stripePayment" class="px-3"></div>
+
+                          <div [ngClass]="payMode == 'Stripe' ? '' : 'paymentBtnDisabled'">
+                            <div *ngIf="orderTime && !isStripePayEnabled; else stripePayNow" class="stripe-card" (click)="initStripe()">
+                              <button class="btn" [disabled]="isStripeIntentFetching">
+                                <span *ngIf="!isStripeIntentFetching">Checkout with stripe</span>
+                                <span *ngIf="isStripeIntentFetching" class="spinner-border"></span>
+                              </button>
+                            </div>
+
+                            <ng-template #stripePayNow>
+                              <div *ngIf="orderTime" class="stripe-card mt-3" (click)="makeStripePayment()">
+                                <button class="btn stripePayNow">Pay now</button>
+                              </div>
+                            </ng-template>
+                          </div>
+                      </div>
+
+                    </div>
+                </div>
+              <br>
+
+              <div class="text-center" *ngIf="payMode == 'Barzahlung'">
+                <button class='btn-danger btn btn-lg btn-block' style="color: white" *ngIf="orderTime"
+                   (click)="redirect()" [disabled]="isOrderAdding">
+                   <span *ngIf="!isOrderAdding">Bestellen</span> <!-- Place Order -->
+                   <span *ngIf="isOrderAdding" class="spinner-border"></span>
+				        </button>
+              </div>
+            </div>
+              </form>
+
+                <div *ngIf="isTimeAcceptable == false && !isHoliday && paymentMode.get('advanceOrder').value == 'AdvanceOrder'">
+                  Bestellung konnte nicht aufgegeben werden...Bitte wählen Sie aus den unten verfügbaren Slots aus. <!-- Could not place order...Please choose from below available slots. -->
+                  <ul class="timeSlots">
+                    <li *ngFor="let time of siteDetails.timeSlots">
+                      (
+                      <ng-container *ngFor="let day of time.days">
+                        {{day}},
+                      </ng-container>
+                      ) from {{time.openTime}} to {{time.closeTime}}
+                    </li>
+                  </ul>
+                </div>
+
+                 <div *ngIf="isHoliday && paymentMode.get('advanceOrder').value == 'AdvanceOrder'">
+                  Bestellung konnte nicht aufgegeben werden... <!--  Could not place order... -->
+                 <span class="holiday-msg">{{holidayMessage}}</span>.
+                </div>
+
+                <div *ngIf="isItemAcceptable == false">
+                  The following items could not be ordered in the selected time. Please remove those items from cart
+                   or choose timings as per item's availability time.
+                  <ul class="timeSlots">
+                    <li *ngFor="let item of zoneItems">
+                      {{item.item.name}} (Available between {{item.startTime}} - {{item.endTime}})
+                    </li>
+                  </ul>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 pr-1" id="checkout">
+                <app-your-order></app-your-order>
+            </div>
+        </div>
+    </div>
+</div>

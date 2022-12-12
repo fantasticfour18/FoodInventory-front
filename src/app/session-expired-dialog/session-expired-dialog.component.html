@@ -1,0 +1,20 @@
+<div class="product-popup">
+
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <i class="fas fa-times"></i>
+  </button>
+
+  <h2 mat-dialog-title>Sitzung abgelaufen</h2>
+  <mat-divider></mat-divider>
+  <mat-dialog-content class="mat-typography pt-4">
+    <p>
+      Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.
+      <br><br>
+      <span class="note">Wenn Ihr Betrag abgezogen wird, wenden Sie sich bitte an den Kundenservice.</span>
+    </p>
+
+    <div class="text-center pt-5">
+      <button class="btn btn-primary" [mat-dialog-close]="true">Close</button>
+    </div>
+  </mat-dialog-content>
+</div>

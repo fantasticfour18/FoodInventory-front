@@ -1,0 +1,117 @@
+.text-right.position-relative h4 {
+  margin: 0 !important;
+  font-size: 14px !important;
+}
+.cart-home .product .col-7 p {
+  margin: 0 !important;
+}
+.cart-home .product .col-7 {
+  padding-left: 8px;
+}
+.cart-home .product .col-1 svg {
+  position: absolute;
+  top: 8px;
+  width: 20px !important;
+  height: 19px !important;
+  left: 12px;
+}
+.cart-home .product .col-1 {
+  align-items: start !important;
+  position: relative;
+  padding: 0 !important;
+}
+.cart-home .product {
+  padding: 12px 0px !important;
+}
+.text-right.position-relative .input-group {
+  margin-bottom: 4px !important;
+}
+.cart-home {
+  box-shadow: none !important;
+}
+div#mobile_pad_zero .text-right.position-relative {
+  margin-left: 25px;
+}
+p.gray_text {
+  color: #aeaeae;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500 !important;
+  margin: 0;
+  padding: 0 20px !important;
+}
+div#mobile_pad_zero {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+.success-popup-message h2,
+.success-popup-message span {
+  font-weight: 500 !important;
+}
+.success-popup-message img {
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+.cart-home {
+  display: block !important;
+}
+.success-popup-message h2,
+.success-popup-message span {
+  font-weight: 700 !important;
+  font-size: 18px !important;
+}
+
+.status-text{
+  text-align: center;
+  font-size: 28pt;
+}
+
+.status-pending {
+  text-align: center;
+  font-size: 26pt;
+}
+
+.status-success {
+  text-align: center;
+  font-size: 26pt;
+  color: green;
+}
+
+.status-denied {
+  text-align: center;
+  font-size: 26pt;
+  color: red;
+}
+
+.order-header, .order-footer {
+  background-color: whitesmoke;
+}
+
+
+.user-details-cnt p {
+  font-size:14px;
+  line-height: 18px;
+  font-weight: 400 !important;
+  text-align: right;
+}
+
+h5.prdct-discount {
+  display: inline-block;
+  background: #57cc02;
+  font-size: 10px;
+  line-height: 10px;
+  font-weight: 500;
+  color: white;
+  padding: 4px 7px 3px;
+  border-radius: 11px;
+}
+
+.user-details-cnt p strong {
+  float: left;
+}
+
+.prdct-checkout-discount {
+  font-size: 8px;
+  line-height: 10px;
+  color: #57cc02;
+}

@@ -1,0 +1,65 @@
+<div id="overlay" *ngIf="isLoading">
+    <div class="overlay-content">
+        <div class="spinner-border"></div>
+    </div>
+</div>
+
+
+<div class="container login-container-main">
+    <div class="row">
+        <div class="col-sm-12 logo d-flex">
+           <a routerLink="/" class="m-auto"><img src="data:image/png;base64,{{this.logoService.getLogo()}}" alt=""></a>
+        </div>
+        <div class="col-sm-12 col-md-8 col-lg-4 col-11 p-4 mx-auto login-box bg-white">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-12" id="login_page">
+                        <div class="text-center mb-3">
+                            <p class="mobile_mb"><strong><!-- Don't have an account? -->
+                                Sie haben kein Konto? <a routerLink="/register" class="anchor-text"><!-- Sign Up -->Registrieren</a></strong></p>
+                            <p><strong><!-- Login With -->Einloggen mit</strong></p>
+
+                                <div class="">
+                                    <a (click)="signInWithGoogle()" class=" btn py-2 btn-google text-white">
+                                        <span><img src="assets/icons/gplus.png "></span> <!-- Login with Google -->
+                                        Mit Google einloggen
+                                    </a>
+                                    <!-- <span class="text-center my-1 d-block " style="font-weight: 400!important; ">oder</span>
+                                    <a (click)="signInWithFB()" class="btn py-2 btn-facebook text-white">
+                                        <span><img src="assets/icons/facebook-logo.png"></span>Mit Facebook einloggen
+                                    </a> -->
+                                 </div>
+                            <span class="text-center mt-3 d-block" style="font-weight: 400 !important;"><!-- OR -->oder</span>
+                            <h2 class=""><strong><!-- Welcome Back -->Willkommen zurück</strong></h2>
+                        </div>
+
+
+                        <form routerAction="/login" (submit)="userLogin()" [formGroup]="loginForm" method="">
+                            <div *ngIf="loginStatus">
+                              <mat-chip-list  aria-label="Error Message">
+                                <mat-chip color="warn" selected>{{loginStatus}}</mat-chip>
+                              </mat-chip-list>
+                              <br>
+                            </div>
+                            <!--<p *ngIf="loginStatus" class='text-danger'>{{loginStatus}}</p>-->
+                            <div class="form-group first">
+                                <label for="email"><strong>E-mail Adresse</strong></label>
+                                <input type="type" required formControlName="email" name="email" class="form-control" id="email">
+                            </div>
+                            <div class="form-group last mb-3">
+                                <label for="password"><strong>Passwort<!-- Password --></strong></label>
+                                <input type="password" required formControlName="password" name="password" class="form-control" id="password">
+                            </div>
+                            <div class="d-sm-flex mb-3 align-items-center">
+                                <span class="ml-auto"><a href="#" class="anchor-text forgot-pass">Passwort vergessen?<!-- Forgot Password? --></a></span>
+                            </div>
+                            <button type="submit" class="btn btn-block py-2 btn-primary"
+                            [disabled]="!loginForm.get('email').valid || !loginForm.get('password').valid">Einloggen<!-- Login --></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="row row-main">
+        <!--<div class="col-sm-12 logo d-flex">
+             <img src="assets/images/logo.png" class="m-auto" alt="">
+        </div>-->
+      <div class="first-box col-sm-12 col-md-8 col-lg-4 col-11 p-4 mx-auto address-box bg-white">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-12" id="login_page">
+                        <div class="text-center mb-3">
+                            <p style="color:rgb(91, 109, 91)"><strong>{{firstName}}, Bestätige deine Bestellung <!-- Confirm Your Order --></strong></p>
+                            <p style="color:rgb(232, 56, 56)" class="mobile_mb" (click)="logOut()"><strong><a class="anchor-text"><!-- Not --> Nicht {{firstName}}? Benutzer wechseln <!-- Switch Account --></a></strong></p>
+                        </div>
+                        <form [formGroup]="addressConfirm">
+
+                            <div style="padding-bottom: 10px; color: #707070;">
+                              <span class="inputRequired">*&nbsp;&nbsp;</span>
+                              <span style="text-decoration: underline"> Diese Felder sind/sind Pflichtfelder <!-- These field(s) is/are required --></span>
+                            </div>
+
+                            <div class="fname">
+                              <label for="firstName"><strong> Vorname <!-- First Name --></strong></label>
+                              <input type="text" formControlName="firstName" class="form-control" id="firstName">
+                            </div>
+
+                            <div class="lname">
+                              <label for="lastName"><strong>Nachname <!-- Last Name --></strong></label>
+                              <input type="text" formControlName="lastName" class="form-control" id="lastName">
+                            </div>
+
+                            <div class="phoneNo">
+                              <label for="phoneNo"><strong> Telefonnummer <!-- Phone Number --></strong> <span class="inputRequired">&nbsp;&nbsp;*</span></label>
+                                <input type="text" required formControlName="phoneNo" name="phoneNo" class="form-control" id="phoneNo" value={{phoneNo}}>
+                            </div>
+                            <div *ngIf="(addressConfirm.get('phoneNo').touched || addressConfirm.get('phoneNo').dirty)
+                              && !addressConfirm.get('phoneNo').valid" class="errorMsg">
+                              Bitte geben Sie eine gültige Handynummer ein (10-stellig). <!--  Please enter valid mobile number (10 digits). -->
+                            </div>
+
+                            <div class="note">
+                              <label for="note"><strong> Notiz (Optional) <!-- Note --></strong></label>
+                                <input type="text" formControlName="note" name="note" class="form-control" id="note">
+                            </div>
+
+                          <div *ngIf="deliveryType=='DELIVERY'">
+                            <div class="address-2">
+                              <label for="houseNumber"><strong><!-- House Number -->Hausnummer</strong> <span class="inputRequired">&nbsp;&nbsp;*</span></label>
+                              <input type="text" formControlName="houseNumber" name="houseNumber" class="form-control" id="houseNumber">
+                            </div>
+                            <div *ngIf="(addressConfirm.get('houseNumber').touched || addressConfirm.get('houseNumber').dirty)
+                              && !addressConfirm.get('houseNumber').valid" class="errorMsg">
+                            <!-- Please enter House Number. -->Bitte Hausnummer eingeben..
+                            </div>
+
+                            <div class="address-2">
+                              <label for="street"><strong><!-- Street -->Straße</strong> <span class="inputRequired">&nbsp;&nbsp;*</span></label>
+                              <input type="text" formControlName="street" name="street" class="form-control" id="street">
+                            </div>
+                            <div *ngIf="(addressConfirm.get('street').touched || addressConfirm.get('street').dirty)
+                              && !addressConfirm.get('street').valid" class="errorMsg">
+                            <!-- Please enter street. -->Bitte Straße eingeben..
+                            </div>
+
+                            <div class="address-2">
+                              <label for="city"><strong><!-- City -->Stadt</strong> <span class="inputRequired">&nbsp;&nbsp;*</span></label>
+                              <input type="text" formControlName="city" name="city" class="form-control" id="city">
+                            </div>
+                            <div *ngIf="(addressConfirm.get('city').touched || addressConfirm.get('city').dirty)
+                              && !addressConfirm.get('city').valid" class="errorMsg">
+                            <!-- Please enter city. -->Bitte Stadt eingeben..
+                            </div>
+
+                           <!--  <div class="address-1">
+                                <label for="address-1"><strong>Die Anschrift</strong>  <span class="inputRequired">&nbsp;&nbsp;*</span></label>
+                                <input type="text" required formControlName="address1" name="address1" class="form-control" id="address-1" value={{address}}>
+                            </div>
+                            <div *ngIf="(addressConfirm.get('address1').touched || addressConfirm.get('address1').dirty)
+                              && !addressConfirm.get('address1').valid" class="errorMsg">
+                              Bitte geben Sie eine gültige Adresse ein.
+                            </div> -->
+
+
+                            <div class="postcode">
+                                <label for="postcode"><strong>Postleitzahl</strong></label>
+                                <input style="resize: none;" type="text" formControlName="postcode" class="form-control" id="postcode">
+                            </div>
+
+                            <button [disabled]="!addressConfirm.get('houseNumber').value
+                              || !addressConfirm.get('street').value"
+                              type="button" class="btn btn-block py-2 btn-primary" (click)="paymentMethod(addressConfirm.value)">
+                              Bestellen <!--   Go to Payment -->
+                            </button>
+                          </div>
+
+                          <div *ngIf="deliveryType=='PICKUP'">
+                            <button type="button"
+                                      class="btn btn-block py-2 btn-primary" (click)="paymentMethod(addressConfirm.value)">
+                                      Bestellen<!-- Go to Payment -->
+                            </button>
+                          </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+      </div>
+  </div>
+</div>

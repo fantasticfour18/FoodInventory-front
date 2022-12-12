@@ -1,0 +1,40 @@
+.resv-header {
+  padding: 20px 0;
+}
+
+.resv-header h1 {
+  font-size: 22pt;
+}
+
+.rest-profile {
+  padding-top: 30px;
+  padding-left: 150px;
+}
+
+.rest-profile i {
+  font-size: 22pt;
+  color: #d41b2c;
+  padding-right: 12px;
+}
+
+.rest-profile span {
+  font-size: 14pt;
+  font-weight: 400!important;
+}
+
+.rest-profile div {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+}
+
+.send-btn {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 50px 0;
+}
+
+.send-btn button {
+  width: 300px;
+}

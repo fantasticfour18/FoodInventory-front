@@ -1,0 +1,151 @@
+<div class="page-wrapper" id="order_success_page_wraper">
+    <div class="container cart-home" id="order_success_page">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" id="success_box">
+                <h1 class="status-text"><!-- Your Order Status -->Ihr Bestellstatus:</h1>
+                <div *ngIf="orderStatus==='AUSSTEHEND'">
+                  <h1 class="text-center status-pending">{{orderStatus}}</h1>
+                  <div class="text-center">
+                    <div class="spinner-border"></div>
+                  </div>
+                </div>
+
+                <div *ngIf="orderStatus==='Akzeptiert'">
+                  <h1 class="text-center status-success">{{orderStatus}}</h1>
+                  <div class="text-center">
+                    <i class="far fa-check-circle"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <i class="far fa-smile"></i>
+                  </div>
+                </div>
+
+                <div *ngIf="orderStatus==='Bestritten'">
+                  <h1 class=" text-center status-denied">{{orderStatus}}</h1>
+                  <div class="text-center">
+                    <i class="fas fa-times-circle"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-frown"></i>
+                  </div>
+                </div>
+
+                <div *ngIf="orderStatus === 'Akzeptiert' || orderStatus === 'Bestritten'" class="text-center pt-5">
+                  Sie werden in {{timer}} Sekunden zur Startseite weitergeleitet
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" id='checkout_section'>
+                <div class="border-box p-4 bg-white" id="mobile_pad_zero">
+                    <h2 class="section-title"><strong><!-- Your Order -->Warenkorb</strong></h2>
+                    <ng-container *ngIf="order && order.orderNumber">
+                      <p class="order-header">{{orderTimeTitle}}: <span class="float-right">{{order.orderTime}}</span>
+                        <br>
+                      <!-- Order ID -->Ihre Bestellnummer: <span class="float-right">{{order.orderNumber}}</span></p>
+                    </ng-container>
+
+                    <div class="products-list container">
+                        <div class="product row pt-2 justify-content-between" *ngFor="let item of cartItems;let i = index">
+                            <!-- <div class="col-1 pt-1 text-center">
+                                <span>
+                                        <svg width="13" height="13" [ngStyle]="{'margin-top': '-5px'}" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.41763 0.784729H7.59032V1.15031H8.37495V0.733551C8.37505 0.329086 8.04616 0 7.64189 0H5.36606C4.96179 0 4.6329 0.329086 4.6329 0.733551V1.15031H5.41763V0.784729Z" fill="#AEAEAE"/>
+                                            <path d="M10.187 4.25928H2.82092C2.61908 4.25928 2.46019 4.43146 2.47646 4.6327L3.09228 12.2475C3.1266 12.6726 3.48117 13 3.90716 13H9.10063C9.52662 13 9.8812 12.6726 9.91551 12.2474L10.5313 4.6327C10.5477 4.43146 10.3888 4.25928 10.187 4.25928V4.25928ZM4.60451 12.1878C4.59628 12.1883 4.58805 12.1886 4.57991 12.1886C4.37421 12.1886 4.20153 12.0284 4.18874 11.8203L3.80282 5.56898C3.78953 5.35266 3.95407 5.1665 4.17029 5.15321C4.38581 5.14011 4.57277 5.30426 4.58606 5.52068L4.97188 11.772C4.98527 11.9883 4.82073 12.1744 4.60451 12.1878V12.1878ZM6.90067 11.7962C6.90067 12.0128 6.72502 12.1885 6.50831 12.1885C6.2916 12.1885 6.11595 12.0128 6.11595 11.7962V5.54478C6.11595 5.32806 6.2916 5.15241 6.50831 5.15241C6.72492 5.15241 6.90067 5.32806 6.90067 5.54478V11.7962ZM9.20507 5.56789L8.83661 11.8192C8.82441 12.0277 8.65144 12.1885 8.44534 12.1885C8.4376 12.1885 8.42977 12.1883 8.42193 12.1879C8.20561 12.1751 8.04057 11.9894 8.05337 11.7731L8.42173 5.52167C8.43443 5.30535 8.6195 5.14031 8.83641 5.15311C9.05273 5.1658 9.21777 5.35157 9.20507 5.56789V5.56789Z" fill="#AEAEAE"/>
+                                            <path d="M11.5438 3.04848L11.2861 2.27605C11.2182 2.07243 11.0276 1.93506 10.8128 1.93506H2.19499C1.98036 1.93506 1.78963 2.07243 1.72179 2.27605L1.46411 3.04848C1.41442 3.19745 1.47909 3.3494 1.59979 3.42517C1.64899 3.45602 1.70721 3.47456 1.77118 3.47456H11.2367C11.3007 3.47456 11.359 3.45602 11.4081 3.42507C11.5288 3.3493 11.5935 3.19735 11.5438 3.04848Z" fill="#AEAEAE"/>
+                                        </svg>
+                                    </span>
+                            </div> -->
+                            <div class="col-7">
+                              <h5 class="prdct-discount m-0" *ngIf=" item.discount && item.discount != 0; else categoryDiscount"> {{item.discount}}% OFF </h5>
+                                   <ng-template #categoryDiscount>
+                                      <h5 class="prdct-discount m-0" *ngIf=" item.catDiscount && item.catDiscount != 0; else overallDiscount"> {{item.catDiscount}}% OFF </h5>
+                                    </ng-template>
+                                    <ng-template #overallDiscount>
+                                    <h5 class="prdct-discount m-0" *ngIf="item.excludeDiscount == false && __siteMeta.collectionDiscount && CartService.deliveryType == 'PICKUP' else deliveryDiscout">
+                                      {{__siteMeta.collectionDiscount}}% OFF
+                                    </h5>
+                                    <ng-template #deliveryDiscout>
+                                      <h5 class="prdct-discount m-0" *ngIf="item.excludeDiscount == false && __siteMeta.deliveryDiscount">
+                                        {{__siteMeta.deliveryDiscount}}% OFF
+                                      </h5>
+                                    </ng-template>
+                                  </ng-template>
+                                  <h3 class="m-0">{{item.name}}</h3>
+                                  <h3 class="m-0">{{item.option}} <span *ngIf="item.price != 0">[{{item.price | number: '1.2-2' | germanCurr: item.price}} €]</span></h3>
+                                  <a *ngIf="item.toppings.length != 0 || item.variant || item.subVariant" data-toggle="collapse" href="#{{'collapse' + item._id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    ....
+                                  </a>
+                                  <div class="collapse" id="{{'collapse' + item._id}}">
+                                  <h3 class="m-0" *ngIf="item.variant && item.variant.length">{{item.variant}} <span *ngIf="item.variantPrice != 0">-{{item.variantPrice | number: '1.2-2' | germanCurr: item.variantPrice}} €</span></h3>
+                                  <h3 class="m-0" *ngIf="item.subVariant && item.subVariant.length">{{item.subVariant}} <span *ngIf="item.subVariantPrice != 0">-{{item.subVariantPrice | number: '1.2-2' | germanCurr: item.subVariantPrice}} €</span></h3>
+                                  <h3 class="m-0" *ngFor="let toping of item.toppings">+ {{toping.name}} -{{toping.price | number: '1.2-2' | germanCurr: toping.price}} € {{toping.toppingCount > 1 ? ' * ' + toping.toppingCount : ''}}</h3>
+                                  </div>
+                                <span [ngClass]="(item.note != '') ? 'note-text' : ''">{{item.note === '' ? '' : item.note}}</span>
+                                <!--<h4 class="product-price text-danger m-0">€ {{item.price}}</h4>-->
+                            </div>
+                            <div class="ml-3 text-right position-relative">
+                                <div class="input-group">
+                                    <div class="value-button" id="decrease" value="Decrease Value"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                                          </svg></div>
+                                    <input type="number" id="number" class="cartItem{{i}}" readonly value="0" [value]="item.quantity" />
+                                    <div class="value-button" id="increase" value="Increase Value"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                          </svg></div>
+                                </div>
+                                <h4>{{itemTotal(item.price, item) | germanCurr: itemTotal(item.price, item)}} €</h4>
+                                <!-- <ng-container *ngIf="item.excludeDiscount == false; else withoutDiscountPrice">
+                                  <h4 *ngIf="item.discount &&item.discount!=0; else overallDiscountPrice">{{itemTotal(item.price-(item.price*(item.discount/100)), item) | germanCurr: itemTotal(item.price, item)}} €</h4>
+                                  <ng-template #overallDiscountPrice>
+                                    <h4 >{{itemTotal(item.price-(item.price*(CartService.discount/100)), item) | germanCurr: itemTotal(item.price, item)}} €</h4>
+                                  </ng-template>
+                                </ng-container>
+                                <ng-template #withoutDiscountPrice>
+                                  <h4 >{{itemTotal(item.price, item) | germanCurr: itemTotal(item.price, item)}} €</h4>
+                                </ng-template> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="products-list container">
+                        <div class="product row py-3">
+                            <div class="col-sm-12">
+                                <p *ngIf="cartNote">Notiz - {{cartNote}}</p>
+                                <!-- <h5>SubtotalZwischensumme: <span class="float-right">{{CartService.cartTotalAmount.subTotal | germanCurr: CartService.cartTotalAmount.subTotal}} €</span></h5> -->
+                                <h5 *ngIf="CartService.deliveryType == 'DELIVERY' && CartService.cartTotalAmount.delivery != 0">Liefergebühr<!-- Delivery Fee -->: <span class="float-right">{{CartService.cartTotalAmount.delivery | germanCurr: CartService.cartTotalAmount.delivery}} €</span></h5>
+                                <h5 class="text-success m-0" *ngIf="this.CartService.cartTotalAmount.discount != 0">Rabatt: <span class="float-right">{{CartService.cartTotalAmount.discount | germanCurr: CartService.cartTotalAmount.discount}} €</span></h5>
+                                <h5 class="text-success m-0" *ngIf="this.CartService.tip != 0">Tip: <span class="float-right">{{CartService.tip | germanCurr: CartService.tip}} €</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-list mb-3 container">
+                        <div class="product row p-2">
+                            <div class="col-sm-12">
+                                <h5 class="m-0">Gesamt<!-- Total -->: <span class="float-right text-danger">{{CartService.cartTotalAmount.total | germanCurr: CartService.cartTotalAmount.total}} €</span></h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="(order && order.orderNumber)" class="products-list user-details-cnt mb-3 container order-footer">
+                      <div class="row">
+                        <div class="col-12"><p><strong>Auftragsart:</strong> {{orderType}}</p></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12"><p><strong>Zahlungsart:</strong> {{order.paymentMode}}</p></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12"><p><strong>Name:</strong> {{order.userDetails.firstName + " " + order.userDetails.lastName}}</p></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12"><p><strong>E-mail:</strong> {{order.userDetails.email}}</p></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12"><p><strong>Handy No:</strong> {{order.userDetails.contact}}</p></div>
+                      </div>
+                      <div class="row" *ngIf="orderType == 'Lieferung'">
+                        <div class="col-12"><p><strong>Adresse:</strong> {{order.userDetails.address}}</p></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

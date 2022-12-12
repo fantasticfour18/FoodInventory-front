@@ -1,0 +1,8 @@
+p#menu_box span.icon {
+  margin-left: 6px;
+}
+p#menu_box {
+  display: flex;
+  align-items: center !important;
+  cursor: pointer;
+}
